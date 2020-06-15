@@ -1,0 +1,59 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+	<div class="row">
+		{% for product in products %}
+		<div class="col-lg-4">
+			<img class="thumbnail" src="{{ product.imageURL }}">
+			<div class="box-element product">
+				<h6><strong>{{product.name}}</strong></h6>
+				<hr>
+
+				<button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+				<a class="btn btn-outline-success" href="#">View</a>
+				<h4 style="display: inline-block; float: right"><strong>₹{{product.price}}</strong></h4>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+	<div id="box">
+		<button class="btn btn-light" onclick="swapStyle('static/css/light.css')">Light Mode</button>
+		<button class="btn btn-dark" onclick="swapStyle('static/css/dark.css')">Dark Mode</button>
+	</div>
+
+	<script type="text/javascript">
+
+		var setTheme = localStorage.getItem('theme')
+		console.log('theme:', setTheme)
+
+		if (setTheme == null){
+			swapStyle('static/css/light.css')
+		}else{
+			swapStyle(setTheme)
+		}
+
+		function swapStyle(sheet){
+			document.getElementById('mystylesheet').href = sheet
+			localStorage.setItem('theme', sheet)
+		}
+
+
+		/*
+		var setTheme = localStorage.getItem('theme')
+		if (setTheme == null){
+			swapStyles('light.css')
+		}else{
+			swapStyles(setTheme)
+		}
+			
+		
+		function swapStyles(sheet){
+			document.getElementById('mystylesheet').href = sheet
+			localStorage.setItem('theme', sheet)
+		}
+		*/
+		
+	</script>
+
+{% endblock content %}
